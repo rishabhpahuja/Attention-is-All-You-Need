@@ -23,7 +23,7 @@ class DecoderBlock(nn.Module):
 
         return x
 
-class Encoder(nn.Module):
+class Decoder(nn.Module):
 
     def __init__(self, layers: nn.ModuleList):
         super().__init__()
