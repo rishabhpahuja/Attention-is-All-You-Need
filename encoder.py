@@ -126,8 +126,6 @@ class MultiHeadAttention(nn.Module):
 
         return  scores@value, scores
             
-
-
     def forward(self, q, k , v, mask):
 
         query = self.query(q)
@@ -185,4 +183,4 @@ class Encoder(nn.Module):
         for layer in self.layers:
             x = layer(x, mask)
         
-        return x
+        return self.norm(x)
