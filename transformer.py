@@ -7,7 +7,7 @@ from decoder import *
 class Transformer(nn.Module):
     def __init__(self, encoder: Encoder,decoder: Decoder, src_embed: InputEmbedding, 
                  tgt_embed: InputEmbedding, src_pos: PositionalEncoding,
-                 tgt_pos: PositionalEncoding, projection_layer: PredictionLayer):
+                 tgt_pos: PositionalEncoding, pridiction_layer: PredictionLayer):
         super().__init__()
 
         self.encoder = encoder
@@ -16,7 +16,7 @@ class Transformer(nn.Module):
         self.tgt_embed = tgt_embed
         self.src_pos = src_pos
         self.tgt_pos = tgt_pos
-        self.prediction_layer = projection_layer
+        self.prediction_layer = pridiction_layer
 
     def encode(self, src, src_mask):
 
@@ -71,7 +71,7 @@ class TransformerModel(nn.MOdule):
         self.prediction_layer = PredictionLayer(d_model, tgt_vocab)
 
         self.Transformer = Transformer(self.encoder, self.decoder, self.src_embed, self.tgt_embed,
-                                       self.src_pos, self.target_pos 
+                                       self.src_pos, self.tgt_pos 
                                        )
     
     def forward(self, x):
