@@ -12,7 +12,7 @@ class DecoderBlock(nn.Module):
         self.self_attention = self_attention
         self.cross_attention = cross_attention
         self.feed_forward = feed_forward
-        self.residual_connection = nn.Module([ResidualConnection(dropout) for _ in range(3)])
+        self.residual_connection = nn.ModuleList([ResidualConnection(dropout) for _ in range(3)])
 
     def forward(self, x, encoder_output, src_mask, tgt_mask):
 
@@ -42,7 +42,7 @@ class PredictionLayer(nn.Module):
     def __init__(self, d_model:int, vocab_size: int):
         super().__init__()
 
-        self.linear = nn.linear(d_model, vocab_size)
+        self.linear = nn.Linear(d_model, vocab_size)
     
     def forward(self, x):
         '''
