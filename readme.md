@@ -118,9 +118,9 @@ If looked closely, we can see that each feature of the vector is modified as per
 
 During implementation the embedding vector $Z$ of each vector, is multiplied by learnable weights, $W_query$, $W_key$ and $W_value$, such that the embedding vector of each word becomes Query, Key and Value. This step is important as it allows the model to learn different representations for the same input word. Query, key and Value is analogous to the following information:
 
-1. Query ($(\vec{Q})$): Represents the word for which we are calculating attention scores.
-2. Key ($(\vec{K})$): Represents the word against which the attention scores are calculated.
-3. Value ($(\vec{V})$): Represents the word's contribution to the output based on the attention scores.
+1. Query $(\vec{Q})$ : Represents the word for which we are calculating attention scores.
+2. Key $(\vec{K})$ : Represents the word against which the attention scores are calculated.
+3. Value $(\vec{V})$ : Represents the word's contribution to the output based on the attention scores.
 
 ## Multi-headed attention:
 
