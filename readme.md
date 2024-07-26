@@ -60,9 +60,6 @@ $$
 To perform the dot product in matrix format, we will have to take the transpose of one of the vectors:
 
 $$
-\vec{a} \cdot \vec{b} = \vec{b} \cdot \vec{a}
-$$
-$$
 \implies \vec{b} \cdot \vec{a}^{T} = \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} \cdot \begin{pmatrix} a_1 & a_2 \end{pmatrix} = a_1 b_1 + a_2 b_2
 $$
 
