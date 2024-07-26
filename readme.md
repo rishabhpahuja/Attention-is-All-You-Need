@@ -34,41 +34,42 @@ Looking at the formula for attention, it becomes:
 
 attention(K,Q,V) = softmax $(\dfrac{V @ V^{T}}{\sqrt{d_{model}}}).V$
 
-where $ @ $ means dot product 
+where @ means dot product 
 
-Dot product signifies the projection of one vector over another vector
+The dot product signifies the projection of one vector over another vector:
+$$
+a \cdot b = |a||b| \cos \theta
+$$
+where $\theta$ is the angle between the two vectors.
 
-$a.b = a*b* cos \theta$
-where $\theta$ is the angle between the two vectors
+Let's represent two words, `a` and `b` in encoding format:
+$$
+\vec{a} = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} \quad \text{and} \quad \vec{b} = \begin{pmatrix} b_1 \\ b_2 \end{pmatrix}
+$$
 
-Let's represent two words, a & b in encoding format:
+To perform the dot product in matrix format, we will have to take the transpose of one of the vectors:
+$$
+\vec{a} \cdot \vec{b} = \vec{b} \cdot \vec{a}
+$$
+$$
+\implies \vec{b} \cdot \vec{a}^{T} = \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} \cdot \begin{pmatrix} a_1 & a_2 \end{pmatrix} = a_1 b_1 + a_2 b_2
+$$
 
-$\vec{a} = \begin{pmatrix} a_{1} \\ a_{2} \end{pmatrix}$ and $\vec{b} = \begin{pmatrix} b_{1} \\ b_{2} \end{pmatrix}$
+Thus, we know that the dot product of the words in their embedding form gives us the projection of one word over the other, i.e., how much one word is affected by another. Now let's put all the words in embedding format in one vector and perform the dot product as above:
 
-To perform dot product in matrix format, we will have to take transpose of one of the vectors:
-
-$\vec{a}.\vec{b}$ = $\vec{b}.\vec{a}$
-
-$\implies \vec{b}.\vec{a}.T = \begin{pmatrix} b_{1} \\ b_{2} \end{pmatrix} . \begin{pmatrix} a_{1} & a_{2}  \end{pmatrix} = a_{1}b_{1}+a_{2}b_{2}$
-
-Thus, we know that the dot product of the words in their embedding form gives us the projection of one word over the another, i.e. that is much is one word affected by another.
-Now let's put all the words in embedding format in one vector and perform the dot product as above:
-
-$
+$$
 \begin{bmatrix}
-a_{1} & a_{2} \\
-b_{1} & a_{2}
-\end{bmatrix} \quad
-.\begin{bmatrix}
-a_{1} & b_{1} \\
-a_{2} & b_{2}
+a_1 & a_2 \\
+b_1 & a_2
+\end{bmatrix} \cdot
+\begin{bmatrix}
+a_1 & b_1 \\
+a_2 & b_2
 \end{bmatrix} =
-$ 
-$
 \begin{bmatrix}
-a_{1} a_{1} + a_{2} a_{2} & a_{1} b_{1} + a_{2} b_{2} \\
-b_{1} a_{1} + a_{2} b_{2} & b_{1} b_{1} + b_{2} b_{2}
+a_1 a_1 + a_2 a_2 & a_1 b_1 + a_2 b_2 \\
+b_1 a_1 + a_2 b_2 & b_1 b_1 + b_2 b_2
 \end{bmatrix}
-$
+$$
 
-This way, we get the effect of each word on another word, including itself. A softmax is applied in the horizontal direction such that the effects become weighted. 
+This way, we get the effect of each word on another word, including itself. A softmax is applied in the horizontal direction such that the effects become weighted.
