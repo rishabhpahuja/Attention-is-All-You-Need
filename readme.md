@@ -38,8 +38,8 @@ where $ @ $ means dot product
 
 Dot product signifies the projection of one vector over another vector
 
-$ a.b = a*b* cos \theta$
-where $ \theta $ is the angle between the two vectors
+$a.b = a*b* cos \theta$
+where $\theta$ is the angle between the two vectors
 
 Let's represent two words, a & b in encoding format:
 
