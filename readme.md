@@ -60,7 +60,7 @@ $$
 To perform the dot product in matrix format, we will have to take the transpose of one of the vectors:
 
 $$
-\implies \vec{b} \cdot \vec{a}^{T} = \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} \cdot \begin{pmatrix} a_1 & a_2 \end{pmatrix} = a_1 b_1 + a_2 b_2
+\implies \vec{b}.\vec{a}.T = \begin{pmatrix} b_{1} \\ b_{2} \end{pmatrix} . \begin{pmatrix} a_{1} & a_{2}  \end{pmatrix} = a_{1}b_{1}+a_{2}b_{2}
 $$
 
 Thus, we know that the dot product of the words in their embedding form gives us the projection of one word over the other, i.e., how much one word is affected by another. Now let's put all the words in embedding format in one vector and perform the dot product as above:
