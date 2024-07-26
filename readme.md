@@ -38,7 +38,7 @@ For the sake of understanding, let's assume that that query, key and value are t
 Looking at the formula for attention, it becomes:
 
 $$
-attention(K,Q,V) = softmax (\dfrac{Z @ Z^{T}}{\sqrt{d_{model}}}) \cdot Z
+attention(Z) = softmax (\dfrac{Z @ Z^{T}}{\sqrt{d_{model}}}) \cdot Z
 $$
 
 where @ means dot product 
