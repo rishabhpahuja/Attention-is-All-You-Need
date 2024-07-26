@@ -32,7 +32,9 @@ The decoder block is very similar to the encoder block. But something to note in
 For the sake of understanding, let's assume that that query, key and value are the same values, i.e. inputs converted to input embeddings and then positional encoding is added to them. Let's call it $ V $.
 Looking at the formula for attention, it becomes:
 
-attention(K,Q,V) = softmax $(\dfrac{V @ V^{T}}{\sqrt{d_{model}}}).V$
+$$
+attention(K,Q,V) = softmax $(\dfrac{V @ V^{T}}{\sqrt{d_{model}}}).V
+$$
 
 where @ means dot product 
 
