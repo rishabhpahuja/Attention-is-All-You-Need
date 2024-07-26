@@ -34,11 +34,11 @@ The decoder block is very similar to the encoder block. But something to note in
 
 ### Understanding of Attention:
 
-For the sake of understanding, let's assume that that query, key and value are the same values, i.e. inputs converted to input embeddings and then positional encoding is added to them. Let's call it $ V $.
+For the sake of understanding, let's assume that that query, key and value are the same values, i.e. inputs converted to input embeddings and then positional encoding is added to them. Let's call it $ Z $.
 Looking at the formula for attention, it becomes:
 
 $$
-attention(K,Q,V) = softmax $(\dfrac{V @ V^{T}}{\sqrt{d_{model}}}).V
+attention(K,Q,V) = softmax (\dfrac{Z @ Z^{T}}{\sqrt{d_{model}}}) \cdot Z
 $$
 
 where @ means dot product 
@@ -51,7 +51,7 @@ $$
 
 where $\theta$ is the angle between the two vectors.
 
-Let's represent two words, `a` and `b` in encoding format:
+Let's represent two words, `a` and `b` as encoded vectors:
 
 $$
 \vec{a} = \begin{bmatrix} a_1 \\ a_2 \end{bmatrix} \quad \text{and} \quad \vec{b} = \begin{bmatrix} b_1 \\ b_2 \end{bmatrix}
@@ -80,4 +80,48 @@ b_1 a_1 + a_2 b_2 & b_1 b_1 + b_2 b_2
 \end{bmatrix}
 $$
 
-This way, we get the effect of each word on another word, including itself. A softmax is applied in the horizontal direction such that the effects become weighted.
+This way, we get the effect of each word on another word, including itself. A softmax is applied in the horizontal direction such that the effects become weighted. This way nth row represents the weight of every word on the nth word. Let's represent the attention calculates as:
+
+$$ attention = 
+\begin{bmatrix}
+W_{aa} & W_{ba} \\
+W_{ab} & W_{bb}
+\end{bmatrix}
+$$
+
+$$
+\text{where } W_{ab} \text{ means the weight of } \vec{a} \text{ on } \vec{b}
+$$
+
+Note: Sum of values along each row is 1
+
+Then another dot product is taken between attention and $'V'$. So the result will be
+
+$$
+\begin{bmatrix}
+W_{aa} & W_{ba} \\
+W_{ab} & W_{bb}
+\end{bmatrix}\cdot
+\begin{bmatrix}
+a_1 & a_2 \\
+b_1 & a_2
+\end{bmatrix} = 
+\begin{bmatrix}
+W_{aa}a_1 + W_{ba}b_1 & W_{aa}a_2 + W_{ba}b_2 \\
+W_{ab}a_1 + W_{bb}b_1 & W_{ab}a_2 + W_{bb}b_2
+\end{bmatrix}
+$$
+
+If looked closely, we can see that each feature of the vector is modified as per the attention calculated. For example, $a_1$ feature of vector $a$ is modified by weighted sum of feature $a_1$ and $b_1$ and so on.
+
+### Understanding Query, Key and Value:
+
+During implementation the embedding vector $Z$ of each vector, is multiplied by learnable weights, $W_query$, $W_key$ and $W_value$, such that the embedding vector of each word becomes Query, Key and Value. This step is important as it allows the model to learn different representations for the same input word. Query, key and Value is analogous to the following information:
+
+1. Query ($(\vec{Q})$): Represents the word for which we are calculating attention scores.
+2. Key ($(\vec{K})$): Represents the word against which the attention scores are calculated.
+3. Value ($(\vec{V})$): Represents the word's contribution to the output based on the attention scores.
+
+## Multi-headed attention:
+
+In this implementation, we have used multi-headed attention. It enhances the model's ability to focus on different parts of the input sequence simultaneously. Instead of having a single set of query, key, and value weight matrices, multi-headed attention employs multiple sets, or "heads," each with its own set of weights. Each head performs its own attention operation, allowing the model to capture various aspects of relationships and dependencies in the data. The outputs of all heads are then concatenated and linearly transformed to produce the final attention output. This approach enables the model to aggregate diverse types of information and understand complex patterns more effectively.
