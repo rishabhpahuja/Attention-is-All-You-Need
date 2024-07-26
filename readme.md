@@ -37,17 +37,21 @@ attention(K,Q,V) = softmax $(\dfrac{V @ V^{T}}{\sqrt{d_{model}}}).V$
 where @ means dot product 
 
 The dot product signifies the projection of one vector over another vector:
+
 $$
 a \cdot b = |a||b| \cos \theta
 $$
+
 where $\theta$ is the angle between the two vectors.
 
 Let's represent two words, `a` and `b` in encoding format:
+
 $$
 \vec{a} = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} \quad \text{and} \quad \vec{b} = \begin{pmatrix} b_1 \\ b_2 \end{pmatrix}
 $$
 
 To perform the dot product in matrix format, we will have to take the transpose of one of the vectors:
+
 $$
 \vec{a} \cdot \vec{b} = \vec{b} \cdot \vec{a}
 $$
