@@ -20,7 +20,9 @@ $\begin{pmatrix} a_{1} \\ a_{2} \end{pmatrix}$
 
 3. Self-attention: One way to understand iis that, correlation scores are calculated between the input words, i.e. how much is a word related to another word in the input. To calculate the score, following formula is used:
 
-attention(K,Q,V) = softmax $(\dfrac{K @ Q^{T}}{\sqrt{d_{model}}}).V$
+$$
+attention(K,Q,V) = softmax (\dfrac{K @ Q^{T}}{\sqrt{d_{model}}}).V
+$$
 
 where K, Q, V represents Key, Query and Value
 
