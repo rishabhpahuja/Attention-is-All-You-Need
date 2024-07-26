@@ -11,7 +11,10 @@ The image above shows the architecture of the transformer. It esssentailly consi
 ## Encoder Blocks:
 It is used to encode all the time information into a single vector. If we look closely at the block, the encoder consists of these sections:
 1. Input Encoding: The entire training and validation dataset is used to create a dictionary of words and a unique ID is assigned to each word. This was achieved by using tokenizer package from hugging face. This unique ID is then converted to to feature space of size 'd_model'. The model learns this conversion during training. This way a word say 'a' becomes:
-$\begin{pmatrix} a_{1} \\ a_{2} \end{pmatrix}$
+
+$$
+\begin{pmatrix} a_{1} \\ a_{2} \end{pmatrix}
+$$
 
 
 2. Positional Encoding:  'sin' and 'cos' positional encoding are added to the input encoding before starting the inference/training. This encoding is constant and not learnt and is used to make the model understand the position of each word in a sentence.
